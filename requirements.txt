@@ -1,0 +1,18 @@
+# Core data/scientific stack
+numpy==1.26.4
+pandas==2.3.0
+scipy==1.15.3
+scikit-learn==1.7.0
+
+# Configuration and tabular IO
+PyYAML==6.0.2
+pyarrow==24.0.0
+tabulate==0.10.0
+
+# Plotting and neuroimaging figure support
+matplotlib==3.10.3
+seaborn==0.13.2
+nilearn==0.12.0
+
+# Tests
+pytest==9.0.2

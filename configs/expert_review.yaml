@@ -1,0 +1,108 @@
+paths:
+  claim_cards_summary: data/processed/claim_cards/claim_cards_summary.csv
+  claim_family_summary: data/processed/claim_cards/claim_family_summary.csv
+  evaluation_results: data/processed/evaluations/evaluation_results.csv
+  output_dir: data/processed/expert_review
+  to_send_dir: data/expert_review/to_send
+  returned_dir: data/expert_review/returned
+  analyzed_dir: data/processed/expert_review/analyzed
+
+selection:
+  random_seed: 42
+  main_expert_n: 60
+  llm_extended_n: 120
+  reserve_n: 20
+  exclude_claim_levels:
+    - direction_summary
+  exclude_bad_text: true
+  require_criteria_passed_for_main: true
+  allow_weak_for_extended: true
+
+main_expert_composition:
+  claim_level_targets:
+    composite: 16
+    atomic_roi: 20
+    group_summary: 10
+    ranking: 6
+    latent_axis: 2
+    latent_axis_association: 2
+    normative_deviation: 2
+    normative_atomic_roi: 2
+  target_type_minimums:
+    diagnosis_or_cdr: 18
+    mmse: 12
+    age: 12
+    acquisition_or_demographic_or_pipeline_or_atlas: 8
+    latent_or_normative: 10
+  evaluation_category_minimums:
+    stable_and_transferable: 10
+    stable_not_transferable: 8
+    fragile: 10
+    high_concordance_fragile_support: 6
+  feature_family_minimums:
+    volume: 25
+    thickness: 20
+  dataset_minimums:
+    AIBL_baseline: 8
+    OASIS1_baseline: 8
+    ADNI_SPM_MATCHED: 6
+
+llm_extended:
+  include_main_expert_set: true
+  prioritize_fragile: true
+  prioritize_pipeline_drift: true
+  prioritize_atlas_sensitivity: true
+  prioritize_latent_normative: true
+
+reviewers:
+  humans:
+    - reviewer_id: neuroscience
+      reviewer_type: human
+      specialty: neuroscience
+    - reviewer_id: geriatrics
+      reviewer_type: human
+      specialty: geriatrics
+    - reviewer_id: radiology
+      reviewer_type: human
+      specialty: radiology
+  llms:
+    - reviewer_id: chatgpt_5_5_thinking
+      reviewer_type: llm
+      specialty: llm
+    - reviewer_id: gemini_3_1_pro
+      reviewer_type: llm
+      specialty: llm
+
+scoring:
+  likert_min: 1
+  likert_max: 5
+  required_score_columns:
+    - plausibility_1_5
+    - clarity_1_5
+    - faithfulness_1_5
+    - usefulness_1_5
+    - reviewer_confidence_1_5
+  categorical_columns:
+    caution_level:
+      - stable
+      - tentative
+      - fragile
+      - reject
+      - not_sure
+    recommended_action:
+      - accept
+      - minor_revise
+      - major_revise
+      - reject
+      - not_sure
+
+decision_rules:
+  expert_accept:
+    min_mean_plausibility: 4.0
+    min_mean_faithfulness: 4.0
+    min_mean_usefulness: 3.5
+  expert_reject:
+    max_mean_plausibility: 2.5
+    max_mean_faithfulness: 2.5
+  high_disagreement:
+    min_score_sd: 1.25

@@ -1,0 +1,27 @@
+"""Shared harmonization schema definitions."""
+
+STANDARD_COLUMNS = [
+    "dataset",
+    "cohort",
+    "subject_id",
+    "scan_id",
+    "visit_code",
+    "age",
+    "sex",
+    "education",
+    "ethnicity",
+    "race",
+    "marital_status",
+    "field_strength",
+    "scanner_protocol",
+    "diagnosis_raw",
+    "diagnosis_3class",
+    "diagnosis_binary_ad_cn",
+    "diagnosis_binary_mci_cn",
+    "diagnosis_binary_ad_mci",
+    "mmse",
+    "icv",
+    "file_path",
+    "preprocessing_string",
+    "image_uid",
+]

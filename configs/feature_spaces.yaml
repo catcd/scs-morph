@@ -1,0 +1,62 @@
+fs8_cortical_volume:
+  dataset_column: cortical_volume
+  feature_names_file: cortical_volume_feats.txt
+  family: volume
+  pipeline: freesurfer8
+  atlas: cortical_regions
+
+fs8_subcortical_volume:
+  dataset_column: subcortical_volume
+  feature_names_file: subcortical_volume_feats.txt
+  family: volume
+  pipeline: freesurfer8
+  atlas: subcortical
+
+fs8_thickness_schaefer200_7:
+  dataset_column: schaefer200_7network
+  feature_names_file: schaefer200_7network_feats.txt
+  family: thickness
+  pipeline: freesurfer8
+  atlas: schaefer200_7network
+
+fs8_thickness_kong200_17:
+  dataset_column: 200Parcels_Kong2022_17Networks
+  feature_names_file: 200Parcels_Kong2022_17Networks_feats.txt
+  family: thickness
+  pipeline: freesurfer8
+  atlas: kong200_17network
+
+fs8_thickness_yale696:
+  dataset_column: YBA_696parcels
+  feature_names_file: YBA_696parcels_feats.txt
+  family: thickness
+  pipeline: freesurfer8
+  atlas: yale696
+
+fastsurfer_cortical_volume:
+  dataset_column: cortical_volume_fastsurfer
+  feature_names_file: cortical_volume_feats.txt
+  family: volume
+  pipeline: fastsurfer
+  atlas: cortical_regions
+
+fastsurfer_subcortical_volume:
+  dataset_column: subcortical_volume_fastsurfer
+  feature_names_file: subcortical_volume_feats.txt
+  family: volume
+  pipeline: fastsurfer
+  atlas: subcortical
+
+spm_thickness_schaefer200_7:
+  dataset_column: schaefer_200_7
+  feature_names_file: schaefer200_7network_feats.txt
+  family: thickness
+  pipeline: spm_cat12
+  atlas: schaefer200_7network
+
+spm_thickness_schaefer200_17:
+  dataset_column: schaefer_200_17
+  feature_names_file: schaefer200_17network_feats.txt
+  family: thickness
+  pipeline: spm_cat12
+  atlas: schaefer200_17network

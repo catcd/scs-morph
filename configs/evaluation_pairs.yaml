@@ -1,0 +1,62 @@
+output_dir: data/processed/evaluations
+pair_groups:
+  - group_id: E1
+    experiment_id: E1_ADNI_TO_AIBL_VOLUME_TRANSFER
+    experiment_type: cross_dataset_transfer
+    source_dataset: ADNI_baseline
+    target_dataset: AIBL_baseline
+    feature_spaces: [fs8_cortical_volume, fs8_subcortical_volume]
+    claims: [dx_cn_ad, dx_cn_mci, mmse, age]
+    roi_match_strategy: exact_roi
+
+  - group_id: E2
+    experiment_id: E2_ADNI_TO_OASIS_VOLUME_TRANSFER
+    source_dataset: ADNI_baseline
+    target_dataset: OASIS1_baseline
+    feature_spaces: [fs8_cortical_volume, fs8_subcortical_volume]
+    claims: [mmse, age, ad_to_cdr]
+    roi_match_strategy: exact_roi
+
+  - group_id: E3
+    experiment_id: E3_FS8_VS_SPM_THICKNESS_DRIFT
+    experiment_type: pipeline_drift
+    dataset: ADNI_SPM_MATCHED
+    feature_pairs:
+      - [fs8_thickness_schaefer200_7, spm_thickness_schaefer200_7, exact_roi]
+      - [fs8_thickness_schaefer200_7, spm_thickness_schaefer200_17, network_7_like]
+      - [spm_thickness_schaefer200_7, spm_thickness_schaefer200_17, network_7_like]
+    claims: [dx_cn_ad, dx_cn_mci, mmse, age]
+
+  - group_id: E4
+    experiment_id: E4_FS8_VS_FASTSURFER_VOLUME_DRIFT
+    experiment_type: fastsurfer_drift
+    dataset: ADNI_baseline
+    feature_pairs:
+      - [fs8_cortical_volume, fastsurfer_cortical_volume, exact_roi]
+      - [fs8_subcortical_volume, fastsurfer_subcortical_volume, exact_roi]
+    claims: [dx_cn_ad, dx_cn_mci, mmse, age]
+
+  - group_id: E5
+    experiment_id: E5_FS8_THICKNESS_ATLAS_SENSITIVITY
+    experiment_type: atlas_sensitivity
+    datasets: [ADNI_baseline, AIBL_baseline, OASIS1_baseline]
+    feature_pairs:
+      - [fs8_thickness_schaefer200_7, fs8_thickness_kong200_17, network_7_like]
+      - [fs8_thickness_schaefer200_7, fs8_thickness_yale696, lobe]
+      - [fs8_thickness_kong200_17, fs8_thickness_yale696, lobe]
+    claims_by_dataset:
+      ADNI_baseline: [dx_cn_ad, dx_cn_mci, mmse, age]
+      AIBL_baseline: [dx_cn_ad, dx_cn_mci, mmse, age]
+      OASIS1_baseline: [cdr, mmse, age]
+
+  - group_id: E6
+    experiment_id: E6_FS8_VOLUME_VS_THICKNESS_SENSITIVITY
+    experiment_type: feature_family_sensitivity
+    datasets: [ADNI_baseline, AIBL_baseline, OASIS1_baseline]
+    feature_pairs:
+      - [fs8_cortical_volume, fs8_thickness_schaefer200_7, lobe]
+      - [fs8_subcortical_volume, fs8_thickness_schaefer200_7, no_direct_roi_match]
+    claims_by_dataset:
+      ADNI_baseline: [dx_cn_ad, dx_cn_mci, mmse, age]
+      AIBL_baseline: [dx_cn_ad, dx_cn_mci, mmse, age]
+      OASIS1_baseline: [cdr, mmse, age]

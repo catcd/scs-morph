@@ -1,0 +1,50 @@
+claims:
+  - setting_id: ADNI_FS8_CORTVOL_CN_AD
+    dataset: ADNI_baseline
+    cohort: pooled
+    feature_space: fs8_cortical_volume
+    claim_type: diagnosis_contrast
+    target: diagnosis_binary_ad_cn
+    positive_label: AD
+    negative_label: CN
+    covariates: [age, sex, education, icv]
+    top_k: 20
+    standardize_features: true
+    standardize_target: false
+    min_n: 30
+
+  - setting_id: ADNI_FS8_SUBVOL_MMSE
+    dataset: ADNI_baseline
+    cohort: pooled
+    feature_space: fs8_subcortical_volume
+    claim_type: continuous_association
+    target: mmse
+    covariates: [age, sex, education, icv]
+    top_k: 10
+    standardize_features: true
+    standardize_target: true
+    min_n: 30
+
+  - setting_id: AIBL_FS8_CORTVOL_MMSE
+    dataset: AIBL
+    cohort: pooled
+    feature_space: fs8_cortical_volume
+    claim_type: continuous_association
+    target: mmse
+    covariates: [age, sex]
+    top_k: 10
+    standardize_features: true
+    standardize_target: true
+    min_n: 30
+
+  - setting_id: OASIS1_FS8_SUBVOL_AGE
+    dataset: OASIS1
+    cohort: pooled
+    feature_space: fs8_subcortical_volume
+    claim_type: age_association
+    target: age
+    covariates: [sex, education, icv]
+    top_k: 10
+    standardize_features: true
+    standardize_target: true
+    min_n: 30

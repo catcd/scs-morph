@@ -1,0 +1,37 @@
+stability_thresholds:
+  stable:
+    evidence_spearman_min: 0.70
+    support_jaccard_min: 0.40
+    direction_retention_min: 0.80
+  moderate:
+    evidence_spearman_min: 0.40
+    support_jaccard_min: 0.20
+    direction_retention_min: 0.60
+
+transfer_thresholds:
+  binary:
+    strong:
+      auc_oriented_min: 0.75
+      abs_cohens_d_min: 0.50
+    moderate:
+      auc_oriented_min: 0.65
+      abs_cohens_d_min: 0.30
+  continuous:
+    strong:
+      abs_spearman_min: 0.35
+    moderate:
+      abs_spearman_min: 0.20
+
+overall_label_rules:
+  stable_and_transferable:
+    require_stability_label: stable
+    require_transfer_label: strong_or_moderate
+  stable_not_transferable:
+    require_stability_label: stable
+    require_transfer_label: weak_or_missing
+  transferable_but_drifted:
+    require_stability_label: fragile_or_moderate
+    require_transfer_label: strong_or_moderate
+  fragile:
+    require_stability_label: fragile
+
